@@ -9,7 +9,7 @@ import {
 import { renderPredictions } from "../utils/renderPredictions";
 
 const detectIntervalMs = 500;
-// let detectIntervalId;
+let detectIntervalId: number;
 
 const ObjectDetection = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -42,7 +42,7 @@ const ObjectDetection = () => {
 
       const net = await cocoSSDLoad();
 
-      setInterval(() => {
+      detectIntervalId = setInterval(() => {
         runObjectDetection(net);
       }, detectIntervalMs);
     } catch (e) {
@@ -67,12 +67,16 @@ const ObjectDetection = () => {
   useEffect(() => {
     showmyVideo();
     runCoco();
+
+    return () => {
+      clearInterval(detectIntervalId);
+    };
   }, []);
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-500"></div>
       </div>
     );
   }
