@@ -83,7 +83,11 @@ const ObjectDetection = () => {
   return (
     <div className="mt-8">
       <div className="relative">
-        <Webcam ref={webcamRef} className="w-full h-[720px] rounded-md" muted />
+        <Webcam
+          ref={webcamRef}
+          className="w-full lg:h-[720px] rounded-md"
+          muted
+        />
         <canvas
           ref={canvasRef}
           className="absolute top-0 left-0 z-10 w-full lg:h-[720px]"
