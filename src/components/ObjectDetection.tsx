@@ -87,6 +87,9 @@ const ObjectDetection = () => {
           ref={webcamRef}
           className="w-full lg:h-[720px] rounded-md"
           muted
+          videoConstraints={{
+            facingMode: "environment",
+          }}
         />
         <canvas
           ref={canvasRef}
